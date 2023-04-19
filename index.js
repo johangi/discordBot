@@ -1,4 +1,4 @@
-const { Client, IntentsBitField, Typing } = require('discord.js');
+const { Client, IntentsBitField, codeBlock, userMention } = require('discord.js');
 const Pinger = new Client({
     intents: [
         IntentsBitField.Flags.Guilds,
@@ -9,9 +9,11 @@ const Pinger = new Client({
 });
 Pinger.config = require('./config.js');
 config = Pinger.config;
+let prefix = '!';
+const commands = ['!help', '!retard', '!code'];
 
 Pinger.on('ready', async () => {
-    Pinger.user.setActivity('Human simulator');
+    Pinger.user.setActivity('Genshin Impact');
     console.log(`${Pinger.user.username} is online!`);
 });
 
@@ -43,20 +45,35 @@ Pinger.on('messageCreate', async message => {
         await message.channel.sendTyping()
         setTimeout(() => {message.reply('I love sex!');}, 500)
     }
-    let prefix = '!';
     if (!message.content.startsWith(prefix)) return;
     switch (message.content) {
         case '!help':
             await message.channel.sendTyping();
-            setTimeout(() => {message.reply('Help is for pussies');}, 500);
+            setTimeout(() => {
+                message.reply('Help is for pussies. \n');
+                message.channel.send(commands.forEach(element => returnCommands(element)));
+            }, 500);
             break;
         case '!retard':
             await message.channel.sendTyping();
-            setTimeout(() => {message.reply(message.author.username + ' is a retard');}, 500);
+            setTimeout(() => {message.reply(userMention('270546422116384768') + ' is a retard');}, 500);
+            break;
+        // case '!retarddm <@421201992057356308>':
+        //     await message.channel.sendTyping();
+        //     setTimeout(() => {message.reply('DM sent!');}, 500);
+        //     console.log(message.mentions.users);
+        //     break;
+        case '!code':
+            await message.channel.sendTyping();
+            setTimeout(() => {message.reply(codeBlock('<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Video</a>'))}, 1000);
             break;
         default:
             break;
     }
 });
+
+function returnCommands (element) {
+    return element.toString();
+}
 
 Pinger.login(config.token);
