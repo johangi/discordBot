@@ -67,6 +67,13 @@ Pinger.on('messageCreate', async message => {
             await message.channel.sendTyping();
             setTimeout(() => {message.reply(codeBlock('<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Video</a>'))}, 1000);
             break;
+        // case '!poll':
+        //     await message.channel.sendTyping();
+        //     setTimeout(() => message.channel.send(message.content).then(sentMessage => {
+        //         sentMessage.react('☑');
+        //         sentMessage.react('❌');
+        //     }));
+        //     break;
         default:
             break;
     }
